@@ -1,0 +1,99 @@
+# R-and-Python-language
+import math
+def arithmetic_mean(numbers):
+    # Check if the list is empty
+    if len(numbers) == 0:
+        return None
+    
+    # Calculate the sum of the numbers
+    total = sum(numbers)
+    
+    # Calculate the arithmetic mean
+    mean = total / len(numbers)
+    
+    return mean
+
+def geometric_mean(numbers):
+    # Check if the list is empty
+    if len(numbers) == 0:
+        return None
+    
+    # Calculate the product of the numbers
+    product = 1
+    for num in numbers:
+        product *= num
+    
+    # Calculate the geometric mean
+    mean = product ** (1/len(numbers))
+    
+    return mean
+    
+def harmonic_mean(numbers):
+    # Check if the list is empty
+    if len(numbers) == 0:
+        return None
+    
+    # Calculate the sum of the reciprocals of the numbers
+    sum_reciprocals = 0
+    for num in numbers:
+        sum_reciprocals += 1/num
+    
+    # Calculate the harmonic mean
+    mean = len(numbers) / sum_reciprocals
+    
+    return mean
+
+def quadratic_mean(numbers):
+    # Check if the list is empty
+    if len(numbers) == 0:
+        return None
+    
+    # Calculate the sum of the squares of the numbers
+    sum_squares = 0
+    for num in numbers:
+        sum_squares += num ** 2
+    
+    # Calculate the quadratic mean
+    mean = math.sqrt(sum_squares / len(numbers))
+    
+    return mean
+    
+    
+    
+    
+    import math
+
+def mean(numbers, method='arithmetic'):
+    # Check if the list is empty
+    if len(numbers) == 0:
+        return None
+    
+    # Calculate the mean based on the chosen method
+    if method == 'arithmetic':
+        total = sum(numbers)
+        result = total / len(numbers)
+    elif method == 'geometric':
+        product = 1
+        for num in numbers:
+            product *= num
+        result = product ** (1/len(numbers))
+    elif method == 'harmonic':
+        sum_reciprocals = 0
+        for num in numbers:
+            sum_reciprocals += 1/num
+        result = len(numbers) / sum_reciprocals
+    elif method == 'quadratic':
+        sum_squares = 0
+        for num in numbers:
+            sum_squares += num ** 2
+        result = math.sqrt(sum_squares / len(numbers))
+    else:
+        raise ValueError('Invalid method')
+    
+    return result
+    
+    
+    if quadratic_mean >= arithmetic_mean >= geometric_mean >= harmonic_mean:
+    print("The quadratic mean is greater than or equal to the arithmetic mean, which is greater than or equal to the geometric mean, which is greater than or equal to the harmonic mean.")
+else:
+    print("The order of the means does not match the expected order.")
