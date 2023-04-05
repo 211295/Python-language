@@ -1,0 +1,40 @@
+from math import comb
+
+def newton_binomial(a, b, n):
+    coefficients = [comb(n, k) for k in range(n+1)]
+    powers_a = [n-k for k in range(n+1)]
+    powers_b = [k for k in range(n+1)]
+    terms = [coefficients[k] * a**powers_a[k] * b**powers_b[k] for k in range(n+1)]
+    return coefficients, powers_a, powers_b, terms
+
+def probabilities(a, b, n):
+    coefficients, powers_a, powers_b, terms = newton_binomial(a, b, n)
+    prob_dict = {}
+    total_prob = 2**n
+    for k in range(n+1):
+        term_prob = coefficients[k] / total_prob
+        prob_dict[f"a^{powers_a[k]}b^{powers_b[k]}"] = term_prob
+    return prob_dict
+
+a = float(input("Enter the value of a: "))
+b = float(input("Enter the value of b: "))
+n = int(input("Enter the value of n: "))
+
+coefficients, powers_a, powers_b, terms = newton_binomial(a, b, n)
+print("Coefficients:", coefficients)
+print("Powers of a:", powers_a)
+print("Powers of b:", powers_b)
+print("Terms:", terms)
+
+prob_dict = probabilities(a, b, n)
+print("Probabilities:", prob_dict)
+
+def bernoulli_model(a, b, n):
+    if a < 0 or a > 1 or b < 0 or b > 1 or a + b != 1:
+        print("Invalid probabilities. Please enter valid probabilities that add up to 1.")
+        return
+    
+    prob_dict = probabilities(a, b, n)
+    coeffs, powers_a, powers_b, terms = newton_binomial(a, b, n)
+    result = sum(terms)
+ print("Result:", result)
