@@ -1,0 +1,45 @@
+library(ggplot2)
+library(nonlinearTseries)
+
+# Create the time series data
+# Generate some sample data
+### x <- rnorm(100)
+### y <- x[1:99]
+
+set.seed(123)
+x <- runif(10)
+y <- runif(10)
+
+# Combine the x and y data into a data frame OR Calculate the Poincaré plot
+df <- data.frame(x = x[-1], y = y[-length(y)])
+
+pp <- poincarePlot(y, x[-1], main = "Poincaré Plot")
+
+# Create a scatter plot of the time series data with the x-axis as the previous data point and the y-axis as the current data point
+ggplot(df, aes(x = x, y = y)) + 
+  geom_point() + 
+  labs(x = "x", y = "y", title = "Poincaré plot") + 
+  geom_abline(intercept = 0, slope = 1, linetype = "dashed", color = "gray")
+
+# Plot the Poincaré plot
+plot(pp)
+
+
+
+### IN PYTHON
+import heartpy as hp
+import matplotlib.pyplot as plt
+
+# Generate some sample data
+x = [0.1 * i for i in range(100)]
+y = x[:-1]
+
+# Calculate the Poincaré plot
+pp = hp.poincare(y, x[:-1], show=False)
+
+# Plot the Poincaré plot
+plt.scatter(pp[:,0], pp[:,1], alpha=0.5)
+plt.title("Poincaré Plot")
+plt.xlabel("RR(n) [s]")
+plt.ylabel("RR(n+1) [s]")
+plt.show()
