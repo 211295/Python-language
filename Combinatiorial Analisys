@@ -1,0 +1,51 @@
+def factorial(n):
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+def calculate_combinations(n, k):
+    numerator = factorial(n)
+    denominator = factorial(k) * factorial(n - k)
+    combinations = numerator // denominator
+    return combinations
+n = int(input("Number of _______:"))
+k = int(input("Number of _______:"))
+result = calculate_combinations(n, k)
+print(f"C({n}, {k}) = {result}")
+
+### OR__________________________________________________________________________________________________
+import math
+def calculate_combinations(n, k):
+    combinations = math.factorial(n) / (math.factorial(k) * math.factorial(n - k))
+    return int(combinations)
+n = int(input("Number of _______:"))
+k = int(input("Number of _______:"))
+result = calculate_combinations(n, k)
+print(f"C({n}, {k}) = {result}")
+
+### Anagram______________________________________________________________________________________________
+def generate_permutations(word):
+word = input("Write the word you would like to see how many anagrams it have:")
+    if len(word) <= 1:
+        return [word]  
+    permutations = []
+    for i in range(len(word)):
+        first_char = word[i]
+        remaining_chars = word[:i] + word[i+1:]
+        for permutation in generate_permutations(remaining_chars):
+            permutations.append(first_char + permutation)
+    
+    return permutations
+result = generate_permutations(word)
+print(result)
+
+### OR______________________________________________________________________________________________________
+from itertools import permutations
+word = input("Write the word you would like to see how many anagrams it have:")
+def generate_anagrams(word):
+    anagrams = [''.join(perm) for perm in permutations(word)]
+    return anagrams
+
+result = generate_anagrams(word)
+print(result)
+
