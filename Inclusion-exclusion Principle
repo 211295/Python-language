@@ -1,0 +1,22 @@
+### INCLUSION-EXCLUSION PRINCIPLE : |A ∪ B ∪ C| = |A| + |B| + |C| - |A ∩ B| - |A ∩ C| - |B ∩ C| + |A ∩ B ∩ C|
+def inclusion_exclusion_principle(sets):
+    n = len(sets)
+    inclusion = [0] * (1 << n)  # Use bit manipulation to represent subsets
+
+    for i in range(1, (1 << n)):
+        sign = -1 if bin(i).count('1') % 2 == 1 else 1  # Alternating sign
+        intersection = set.intersection(*[sets[j] for j in range(n) if (i & (1 << j))])
+        inclusion[i] = sign * len(intersection)
+
+    union_size = sum(inclusion)
+    return union_size
+
+# Example usage
+set_A = {1, 2, 3}
+set_B = {2, 3, 4}
+set_C = {3, 4, 5}
+
+sets = [set_A, set_B, set_C]
+
+result = inclusion_exclusion_principle(sets)
+print(f"Union size: {result}")
