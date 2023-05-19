@@ -1,0 +1,57 @@
+from math import factorial
+def count_permutations(word):
+    return factorial(len(word))
+
+def count_fixed_permutations(word, fixed_letters):
+    fixed_count = sum(1 for letter in word if letter in fixed_letters)
+    fixed_factorial = factorial(fixed_count)
+    remaining_letters = len(word) - fixed_count
+    remaining_permutations = factorial(remaining_letters)
+    return fixed_factorial * remaining_permutations
+
+word = input("Choose a word: ") 
+### chose the letter you would like to fix here : fixed_letters = ["_"]
+
+total_permutations = count_permutations(word)
+fixed_permutations = count_fixed_permutations(word, fixed_letters)
+percentage = (fixed_permutations / total_permutations) * 100
+
+print(f"Total permutations: {total_permutations}")
+print(f"Fixed permutations: {fixed_permutations}")
+print(f"Percentage: {percentage}%")
+
+### OR ____________________________________________________________________________________________________________
+def factorial(n):
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+def count_permutations(word):
+    count = {}
+    for letter in word:
+        count[letter] = count.get(letter, 0) + 1
+
+    total_permutations = factorial(len(word))
+    for letter_count in count.values():
+        total_permutations //= factorial(letter_count)
+
+    return total_permutations
+
+def count_fixed_permutations(word, fixed_letters):
+    fixed_count = sum(1 for letter in word if letter in fixed_letters)
+    fixed_permutations = factorial(fixed_count)
+    remaining_count = len(word) - fixed_count
+    remaining_permutations = count_permutations(word.replace("".join(fixed_letters), ""))
+    return fixed_permutations * remaining_permutations
+
+word = input("Choose a word: ") 
+### chose the letter you would like to fix here : fixed_letters = ["_","_","_"]
+
+total_permutations = count_permutations(word)
+fixed_permutations = count_fixed_permutations(word, fixed_letters)
+percentage = (fixed_permutations / total_permutations) * 100
+
+print(f"Total permutations: {total_permutations}")
+print(f"Fixed permutations: {fixed_permutations}")
+print(f"Percentage: {percentage}%")
