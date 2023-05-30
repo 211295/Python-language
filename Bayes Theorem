@@ -1,0 +1,19 @@
+count_H = int(input("Give me the count of observed events: "))
+count_E = int(input("Give me the count of hypothetical events: "))
+count_E_given_H = int(input("Give me the count of event E occurring given that event H has already occurred: "))
+count_total = int(input("Give me the total count of events: "))
+
+# Calculating the probabilities
+P_H = count_H / count_total
+P_E = count_E / count_total
+P_E_given_H = count_E_given_H / count_H
+
+# Applying Bayes' theorem
+P_H_given_E = (P_E_given_H * P_H) / P_E
+
+print("The probability of event H occurring given that event E has already occurred is:", P_H_given_E)
+
+### P(A) = Prior probability of event A
+### P(B|A) = Likelihood of event B occurring given that event A has already occurred
+### P(A|B) = Probability of event A occurring given that event B has already occurred
+### P(A|B) = (P(B|A) * P(A)) / P(B)
