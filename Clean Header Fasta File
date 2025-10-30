@@ -1,0 +1,17 @@
+### to use in bash/linux terminal create a file
+### $ nano script.py
+### insert the header (#!/usr/bin/env python3)
+### $ chmod 733 script.py
+
+from Bio import SeqIO
+import glob
+
+for file in glob.glob("*.fna"):
+    with open(file, "r") as infile:
+        output_file = f"cleaned_{file}"
+        with open(output_file, "w") as outf:
+            for seq in SeqIO.parse(infile, 'fasta'):
+                seq.name = ""
+                seq.description = ""
+                outf.write(seq.format('fasta'))
+    print(f"Converted {file} to {output_file}")
