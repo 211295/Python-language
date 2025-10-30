@@ -1,0 +1,14 @@
+# Create the 'History' of python commands in the terminal
+# There are 3 ways:
+# 1)
+import readline
+for i in range(readline.get_current_history_lenght()):
+	print(readline.get_history_item(i + 1))
+# 2)
+import readline
+history_length = readline.get_current_history_length()
+for i in range(max(1, history_length-10), history_length+1):
+	 print(readline.get_history_item(i))
+# 3)
+import readline
+readline.write_history_file('temp_history.txt')
