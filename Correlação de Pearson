@@ -1,0 +1,28 @@
+import numpy as np 
+import matplotlib.pyplot as plt
+from scipy.stats import pearsonr
+import pandas as pd
+
+N = 100
+X = np.linspace(-1,1,N)
+erro = np.random.uniform(-1,1,N) # ruido a ser inlcuido
+for sigma in np.arange(0,2,0.2)
+  Y = -0.8*X + erro*sigma
+  plt.plot(X,Y,'ro')
+  corr, p_value = pearson(X,Y)
+  corr = int(corr*100)/100
+  string = "corr ="+ str(corr)
+  plt.xlim(-1.5,1.5)
+  plt.ylim(-2,2)
+  plt.text(0.6,1.7, string , fontsize=15)
+  plt.show(True)
+
+data = pd.read_csv('data/iris.csv', header=(0))
+corr2 = data.corr()
+plt.figure(figsize=(7,5))
+plt.imshow(corr2, cmap='Blues', interpolation='none', aspect='auto')
+plt.colorbar()
+plt.xticks(range(len(corr)), corr.columns, rotation='vertical')
+plt.yticks(range(len(corr)), corr.columns); plt.suptitle('Correlation between variables'), fontsize=15, fontweight='bold')
+plt.grid(False)
+plt.show()  
